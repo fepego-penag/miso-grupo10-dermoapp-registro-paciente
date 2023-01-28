@@ -1,18 +1,25 @@
-version: 0.2
 phases:
   install:
     runtime-versions:
-      python: 3.9
+       python: 3.9
+  pre_build:
+    commands:
+      - python3 --version
+      - pip3 install --upgrade pip
+      - pip3 install --upgrade awscli
+      - sudo docker info
   build:
     commands:
       - echo Build started on `date`
-      - echo Compiling the Python code...
-      - pip install -r requirements.txt
+      - echo Building the Docker image...
+      - ls
+      - cd app
+      - docker build -t cf-demo:$CODEBUILD_BUILD_NUMBER .
+      - docker ls
   post_build:
     commands:
       - echo Build completed on `date`
-      - pwd
-      - ls -al
-artifacts:
-  files:
-    - '**/*'
+      - echo Pushing the Docker image...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 023877644838.dkr.ecr.us-east-1.amazonaws.com
+      - docker tag dermoapp-lambdas-img:$CODEBUILD_BUILD_NUMBER 023877644838.dkr.ecr.us-east-1.amazonaws.com/dermoapp-lambdas-img:$CODEBUILD_BUILD_NUMBER
+      - docker push 023877644838.dkr.ecr.us-east-1.amazonaws.com/dermoapp-lambdas-img:$CODEBUILD_BUILD_NUMBER
