@@ -25,16 +25,11 @@ jobs:
         uses: montudor/action-zip@v1
         with:
           args: zip -qq -r deps.zip deps
-      - name: copy deps zip
-        uses: canastro/copy-file-action@master
-        with:
-          source: "deps.zip"
-          target: "./output/deps.zip"
-      - name: copy source lambda file
-        uses: canastro/copy-file-action@master
-        with:
-          source: "lambda_function.py"
-          target: "./output/lambda_function.py"
+      - name: copy deps and source file into output folder
+        run: |
+          mkdir output
+          cp deps.zip output/
+          cp lambda_function.py output/
       - name: Zipping output code
         uses: montudor/action-zip@v1
         with:
