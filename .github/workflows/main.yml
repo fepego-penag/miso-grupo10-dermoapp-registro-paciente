@@ -12,6 +12,19 @@ jobs:
     steps:
       - name: checkout source code
         uses: actions/checkout@v1
+      - name: Install Python dependencies
+        uses: py-actions/py-dependency-install@v4
+        with:
+          path: "/output/requirements.txt"
+      - name: copy file
+        uses: canastro/copy-file-action@master
+        with:
+          source: "lambda_function.py"
+          target: "/output/lambda_function.py"
+      - name: Zipping output code
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r output.zip output
       - name: default deploy
         uses: appleboy/lambda-action@master
         with:
@@ -19,4 +32,5 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ${{ secrets.AWS_REGION }}
           function_name: test-lambda
-          source: lambda_function.py
+          zip_file: output.zip
+          dry_run: true
