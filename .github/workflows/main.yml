@@ -12,6 +12,11 @@ jobs:
     steps:
       - name: checkout source code
         uses: actions/checkout@v1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::023877644838:role/service-role/test-lmbda-role-ew744n2h
+          aws-region: ${{ secrets.AWS_REGION }}
       - name: default deploy
         uses: appleboy/lambda-action@master
         with:
