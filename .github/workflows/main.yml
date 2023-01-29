@@ -12,8 +12,8 @@ jobs:
     - name: Deploy code to Lambda
       uses: qubitro/action-lambda-python-zip@v1.0
       with:
-        lambda_layer_arn: 'arn:aws:lambda:us-east-1:023877644838:function:test-lmbda'
-        lambda_function_name: 'test-lmbda'
+        lambda_layer_arn: 'arn:aws:lambda:us-east-1:023877644838:function:test-lambda'
+        lambda_function_name: 'test-lambda'
         lambda_region: 'us-east-1'
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
