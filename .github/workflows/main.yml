@@ -15,7 +15,7 @@ jobs:
       - name: Install Python dependencies
         uses: py-actions/py-dependency-install@v4
         with:
-          path: "/output/requirements.txt"
+          path: "requirements.txt"
       - name: copy file
         uses: canastro/copy-file-action@master
         with:
