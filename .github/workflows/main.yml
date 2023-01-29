@@ -38,4 +38,3 @@ jobs:
           aws_region: ${{ secrets.AWS_REGION }}
           function_name: test-lambda
           zip_file: output.zip
-          dry_run: true
