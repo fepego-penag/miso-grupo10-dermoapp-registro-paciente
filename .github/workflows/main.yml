@@ -21,12 +21,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8 pytest
           pip install -r requirements.txt -t ./deps
-      - name: Zipping output code
+      - name: Zipping deps code
         uses: montudor/action-zip@v1
         with:
           args: zip -qq -r deps.zip deps
       - name: copy deps and source file into output folder
         run: |
+          rm -rf output
           mkdir output
           cp deps.zip output/
           cp lambda_function.py output/
