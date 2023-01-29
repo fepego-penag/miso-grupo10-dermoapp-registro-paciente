@@ -18,19 +18,14 @@ jobs:
           python-version: 3.9
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install flake8 pytest
-          pip install -r requirements.txt -t ./deps
-      - name: Zipping deps code
-        uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r deps.zip deps
-      - name: copy deps and source file into output folder
-        run: |
           rm -rf output
           mkdir output
-          cp deps.zip output/
           cp lambda_function.py output/
+          cp requirements.txt output/
+          cd output
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          pip install -r requirements.txt -t .
       - name: Zipping output code
         uses: montudor/action-zip@v1
         with:
