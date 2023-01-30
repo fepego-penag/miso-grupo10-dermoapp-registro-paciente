@@ -26,8 +26,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8 pytest
           pip install -r requirements.txt -t .
-          cd ..
-          zip -r -j test-lambda.zip test-lambda/*
+          zip -r ../deploy.zip .
       - name: default deploy
         uses: appleboy/lambda-action@master
         with:
@@ -35,4 +34,4 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ${{ secrets.AWS_REGION }}
           function_name: test-lambda
-          zip_file: test-lambda.zip
+          zip_file: deploy.zip
