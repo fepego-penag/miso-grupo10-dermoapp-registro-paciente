@@ -26,10 +26,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8 pytest
           pip install -r requirements.txt -t .
-      - name: Zipping output code
-        uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r test-lambda.zip test-lambda
+          cd ..
+          zip -r -j test-lambda.zip test-lambda/*
       - name: default deploy
         uses: appleboy/lambda-action@master
         with:
