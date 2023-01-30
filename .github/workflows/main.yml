@@ -18,10 +18,10 @@ jobs:
           python-version: 3.9
       - name: Install dependencies
         run: |
-          rm -rf output
-          mkdir output
-          cp lambda_function.py output/
-          cp requirements.txt output/
+          rm -rf test-lambda
+          mkdir test-lambda
+          cp lambda_function.py test-lambda/
+          cp requirements.txt test-lambda/
           cd output
           python -m pip install --upgrade pip
           pip install flake8 pytest
@@ -29,7 +29,7 @@ jobs:
       - name: Zipping output code
         uses: montudor/action-zip@v1
         with:
-          args: zip -qq -r output.zip output
+          args: zip -qq -r test-lambda.zip test-lambda
       - name: default deploy
         uses: appleboy/lambda-action@master
         with:
@@ -37,4 +37,4 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ${{ secrets.AWS_REGION }}
           function_name: test-lambda
-          zip_file: output.zip
+          zip_file: test-lambda.zip
