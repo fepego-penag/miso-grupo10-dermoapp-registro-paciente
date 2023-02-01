@@ -20,7 +20,7 @@ jobs:
         run: |
           rm -rf test-lambda
           mkdir test-lambda
-          cp lambda_function.py test-lambda/
+          cp src/* test-lambda/
           cp requirements.txt test-lambda/
           cd test-lambda
           python -m pip install --upgrade pip
