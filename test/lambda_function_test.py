@@ -1,10 +1,8 @@
-import pytest
-from src.lambda_function import PacientDetailService
+from src.lambda_function import lambda_handler
 
 
 class TestPacientDetailService:
 
     def test_givenLambdaFunctionCallThenReturnJsonResponse(self):
-        _service = PacientDetailService()
-        serviceResponse = _service.lambda_handler(any, any)
+        serviceResponse = lambda_handler(any, any)
         assert serviceResponse['statusCode'] == 200
