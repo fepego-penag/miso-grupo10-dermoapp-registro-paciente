@@ -10,7 +10,3 @@ class TestPacientDetailService:
     def test_givenLambdaFunctionCallThenReturnJsonResponse_dup(self):
         serviceResponse = lambda_handler_duplication(any, any)
         assert serviceResponse['statusCode'] == 200
-
-    def test_givenLambdaFunctionCallThenReturnJsonResponse2(self):
-        serviceResponse = lambda_handler_duplication2(any, any)
-        assert serviceResponse['statusCode'] == 200
