@@ -24,3 +24,14 @@ def lambda_handler_duplication(event, context):
             }
         ),
     }
+
+def lambda_handler_duplication2(event, context):
+    x = requests.get('https://w3schools.com/python/demopage.htm')
+    return {
+        "statusCode": 200,
+        "body": json.dumps(
+            {
+                "message": "hello from CI GIT pipline dev!" + x.text,
+            }
+        ),
+    }
