@@ -28,7 +28,18 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Running Unit Test
       run: |
-        pytest -v -x
+        pip install pylint pytest pytest-cov selenium playwright
+        pytest -v --cov --cov-report=xml --cov-report=html
+    - name: Upload coverage and test report
+      uses: actions/upload-artifact@v2
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      with:
+        name: code-coverage
+        path: htmlcov
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
