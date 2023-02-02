@@ -9,7 +9,7 @@ def lambda_handler(event, context):
         "statusCode": 200,
         "body": json.dumps(
             {
-                "message": "hello from CI GIT!" + x.text,
+                "message": "hello from CI GIT pipline dev!" + x.text,
             }
         ),
     }
