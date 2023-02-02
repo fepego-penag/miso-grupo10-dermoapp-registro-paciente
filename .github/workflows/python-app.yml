@@ -36,6 +36,11 @@ jobs:
       run: |
         pip install pylint pytest pytest-cov selenium playwright
         pytest -v --cov --cov-report=xml --cov-report=html
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - name: Test with pytest
       run: |
         pytest
